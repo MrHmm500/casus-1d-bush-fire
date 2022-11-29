@@ -11,9 +11,3 @@ Given the location of fire on the strip, you have to command the firefighter to 
 At this moment wind speed is very slow. You can assume the fire does not spread during your operation.
 
 Move fast, Commander!
-
-
-
-⏭️ What's Next?
-
-Once you have solved this puzzle, you can continue the challenge in an advanced version in 2-dimensions, interactive puzzle "Forest Fire": https://www.codingame.com/training/medium/forest-fire
