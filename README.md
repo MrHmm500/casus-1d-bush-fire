@@ -4,11 +4,6 @@ The bushland has an area of 1 x L unit length and each water drop is effective t
 
 For example, if a water drop is targeted at cell 4, by splash effect it will put out fire in cell 3, 4 and 5 at the same time.
 
- _ _ _ _ _ _ _ _
-|_|_|f|f|f|_|_|_
- 1 2 3 4 5 6 7
-
-
 If the water drop is targeted at cell 1, fire in cell 1 and 2 will be put out.
 
 Given the location of fire on the strip, you have to command the firefighter to put out all fire with the least number of water drops.
