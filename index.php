@@ -1,37 +1,52 @@
 <?php
-/**
- * Auto-generated code below aims at helping you parse
- * the standard input according to the problem statement.
- **/
+$jsonTestCases = file_get_contents('testcases.json');
+$testCases = json_decode($jsonTestCases);
+foreach ($testCases as $caseName => $caseData) {
+    echo "-----------------------------------<br />";
+    echo $caseName . ' wordt getest<br />';
+    echo 'expected output: <br />';
+    echo str_replace ("\n", '<br />', $caseData->expectedOutput) . '<br /><br />';
 
-$lines = [];
-$fire = [];
-fscanf(STDIN, "%d", $N);
-for ($i = 0; $i < $N; $i++)
-{
-    $fire[$i] = [];
-    $lines[] = stream_get_line(STDIN, 255 + 1, "\n");
-    foreach (str_split($lines[$i]) as $index => $letter) {
-        if ($letter != '.') {
-            $fire[$i][$index] = true;
-        }
-    }
+    $fire = extractFirePositionFromLines(explode("\n", $caseData->input));
+
+    $extinguished = [];
+    echo "-----------------------------------<br />";
+    echo "actual output:<br />";
+
+    extractOutputFromFire($fire);
+
+    echo "<br />";
 }
 
-$extinguished = [];
-foreach($fire as $i => $fireline) {
-    $amountOfWater = 0;
-    $extinguished[$i] = [];
-    foreach($fireline as $index => $firesingular) {
-        if(isset($extinguished[$i][$index]) && $extinguished[$i][$index] == true) {
-            continue;
+function extractFirePositionFromLines($lines) {
+    $fire = [];
+    foreach ($lines as $rowNumber => $letters) {
+        $fire[$rowNumber] = [];
+        foreach (str_split($letters) as $letterIndex => $letter) {
+            if ($letter == 'f') {
+                $fire[$rowNumber][$letterIndex] = true;
+            }
         }
-        
-        $extinguished[$i][$index] = true;
-        $extinguished[$i][$index+1] = true;
-        $extinguished[$i][$index+2] = true;
-        $amountOfWater++;
     }
-    echo("$amountOfWater\n");
+    return $fire;
 }
 
+function extractOutputFromFire($fire) {
+    foreach ($fire as $i => $fireline) {
+        $amountOfWater = 0;
+        $extinguished[$i] = [];
+
+        foreach ($fireline as $index => $firesingular) {
+            if (isset($extinguished[$i][$index]) && $extinguished[$i][$index]) {
+                continue;
+            }
+
+            $extinguished[$i][$index] = true;
+            $extinguished[$i][$index+1] = true;
+            $extinguished[$i][$index+2] = true;
+            $amountOfWater++;
+        }
+
+        echo ("$amountOfWater <br />");
+    }
+}
