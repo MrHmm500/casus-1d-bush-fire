@@ -18,7 +18,7 @@ foreach ($testCases as $caseName => $caseData) {
     echo "<br />";
 }
 
-function extractFirePositionFromLines($lines) {
+function extractFirePositionFromLines(array $lines): array {
     $fire = [];
     foreach ($lines as $rowNumber => $letters) {
         $fire[$rowNumber] = [];
@@ -31,16 +31,17 @@ function extractFirePositionFromLines($lines) {
     return $fire;
 }
 
-function extractOutputFromFire($fire) {
-    foreach ($fire as $i => $fireline) {
+function extractOutputFromFire(array $fire): void {
+    foreach ($fire as $i => $fireLine) {
         $amountOfWater = 0;
         $extinguished[$i] = [];
 
-        foreach ($fireline as $index => $firesingular) {
+        foreach (array_keys($fireLine) as $index) {
             if (isset($extinguished[$i][$index]) && $extinguished[$i][$index]) {
                 continue;
             }
 
+            // if fire is detected (happy path), throw water on the one after, so it and any possible others are extinguished
             $extinguished[$i][$index] = true;
             $extinguished[$i][$index+1] = true;
             $extinguished[$i][$index+2] = true;
