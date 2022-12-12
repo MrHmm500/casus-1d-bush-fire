@@ -11,3 +11,5 @@ Given the location of fire on the strip, you have to command the firefighter to 
 At this moment wind speed is very slow. You can assume the fire does not spread during your operation.
 
 Move fast, Commander!
+
+To run this: php -S localhost:8080 -t [folder name]
